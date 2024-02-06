@@ -1,19 +1,20 @@
-const {
-    createApp
-} = Vue
+const { createApp } = Vue;
+
 createApp({
-    data (){
+    data() {
         return {
             arrayEmails: []
         }
     },
-    mounted(){
-        for( let i=0; arrayEmails.leght > 10 ; i++){
-            const promise =
+    mounted() {
+        for (let i = 0; i < 10; i++) {
             axios.get("https://flynn.boolean.careers/exercises/api/random/mail")
-            .then(response=> {
-                return response.data.response
-            })
+                .then(response => {
+                    this.arrayEmails.push(response.data.response);
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                });
         }
     }
-}) .mount("#app")
+}).mount("#app");
